@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+    redis:
+      container_name: "redis"
+      image: redis:alpine
+      ports:
+        - "6379:6379" # To Connect redis from local cmd use : docker exec -it cores-redis redis-cli
+    localstack:
+        container_name: "localstack" # Container name in your docker
+        image: localstack/localstack:latest # Will download latest version of localstack
+        #image: localstack/localstack-full:latest # Full image support WebUI
+        ports:
+          - "4566:4566" # Default port forward
+          - "9200:4571" # Elasticsearch port forward
+          #- "8080:8080: # WebUI port forward
+        environment:
+          - SERVICES=es, s3, ec2, dynamodb, elasticcache, sqs #AWS Services that you want in your localstack
+          - DEBUG=1 # Debug level 1 if you want to logs, 0 if you want to disable
+          - START_WEB=0 # Flag to control whether the Web UI should be started in Docker
+          - LAMBDA_REMOTE_DOCKER=0
+          - DATA_DIR=/tmp/localstack/data #  Local directory for saving persistent data(Example: es storage)
+          - DEFAULT_REGION=us-east-1
+        volumes:
+          - './.localstack:/tmp/localstack'
+          - '/var/run/docker.sock:/var/run/docker.sock'

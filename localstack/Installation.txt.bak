@@ -1,0 +1,34 @@
+install docker
+install python
+add path of python installation
+
+if pip command not find follow the step
+https://phoenixnap.com/kb/install-pip-windows
+
+Python installation
+C:\Users\singh\AppData\Local\Programs\Python\Python310
+
+https://onexlab-io.medium.com/docker-compose-localstack-fadee1e88a49
+https://gist.github.com/sats17/493d05d8d4dfd16b7dad399163075156#file-docker-compose-yml
+http://localhost:4566/health
+
+create a profile
+
+aws configure --profile localstack
+aws configure
+ [ manoj, manoj, us-ease-1, json]
+
+//create a s3 bucket
+aws --endpoint-url=http://localhost:4566 s3 mb s3://manoj
+
+//upload file test.txt to s3 bucket
+
+aws --endpoint-url=http://localhost:4566 s3 cp Test.txt s3://manoj
+
+//Checking the file
+
+aws --endpoint-url=http://localhost:4566 s3 ls s3://manoj
+
+//Ide for fullstack
+
+Commandeer ide for localstack
